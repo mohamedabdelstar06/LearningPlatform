@@ -1,0 +1,80 @@
+﻿@using LearningPlatform.DAL.Data.Enum
+@model CourseVM
+@{
+	ViewData["Title"] = "Create Course";
+}
+<h1>Create Course</h1>
+<div class="row">
+	<div class="col-md-4">
+		<form method="post" enctype="multipart/form-data">
+			<div class="mb-3">
+				<label asp-for="Course.CourseName"></label>
+				<input asp-for="Course.CourseName" class="form-control" />
+				<span asp-validation-for="Course.CourseName" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.CourseDescription"></label>
+				<input asp-for="Course.CourseDescription" class="form-control" />
+				<span asp-validation-for="Course.CourseDescription" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.Image"></label>
+				<input type="file" name="file" id="imgfile" class="form-control" />
+				
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.TotalLecture"></label>
+				<input asp-for="Course.TotalLecture" class="form-control" />
+				<span asp-validation-for="Course.TotalLecture" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.CourseTime"></label>
+				<input asp-for="Course.CourseTime" class="form-control" />
+				<span asp-validation-for="Course.CourseTime" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.Price"></label>
+				<input asp-for="Course.Price" class="form-control" />
+				<span asp-validation-for="Course.Price" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.Level"></label>
+				<select class="form-control" asp-for="Course.Level" asp-items="@Html.GetEnumSelectList<Level>()">
+					<option disabled selected> -- Select Level --  </option>
+				</select>
+				<span asp-validation-for="Course.Price" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.CategoryId"></label>
+				<select class="form-control" asp-for="Course.CategoryId" asp-items="Model.CategoryList">
+					<option disabled selected> -- Select Category --  </option>
+				</select>
+				<span asp-validation-for="Course.TotalLecture" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Course.IsTrending">Is Trending</label>
+
+				<div>
+					<input type="radio" asp-for="Course.IsTrending" name="Course.IsTrending" value="true" id="IsTrendingTrue">
+					<label for="IsTrendingTrue">Yes</label>
+				</div>
+
+				<div>
+					<input type="radio" asp-for="Course.IsTrending" name="Course.IsTrending" value="false" id="IsTrendingFalse">
+					<label for="IsTrendingFalse">No</label>
+				</div>
+
+				<span asp-validation-for="Course.IsTrending" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<button type="submit" class="btn btn-primary">Create</button>
+			</div>
+		</form>
+	</div>
+</div>
+<div>
+	<a asp-action="Index" asp-controller="Category" class="btn btn-warning">Back To Index</a>
+</div>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

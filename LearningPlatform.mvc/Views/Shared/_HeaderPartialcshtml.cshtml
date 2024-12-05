@@ -1,0 +1,58 @@
+﻿<header class="navbar-light navbar-sticky header-static">
+	<!-- Logo Nav START -->
+	<nav class="navbar navbar-expand-xl">
+		<div class="container-fluid px-3 px-xl-5">
+			<!-- Logo START -->
+			<a class="navbar-brand" href="/User/Home/Index">
+				<img class="light-mode-item navbar-brand-item" src="~/assets/images/logo.svg" alt="logo">
+				<img class="dark-mode-item navbar-brand-item" src="~/assets/images/logo-light.svg" alt="logo">
+			</a>
+			<!-- Logo END -->
+			<!-- Responsive navbar toggler -->
+			<button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-animation">
+					<span></span>
+					<span></span>
+					<span></span>
+				</span>
+			</button>
+
+			<!-- Main navbar START -->
+			<div class="navbar-collapse collapse" id="navbarCollapse">
+
+				<!-- Nav category menu START -->
+				<ul class="navbar-nav navbar-nav-scroll me-auto">
+					<!-- Nav item 1 Demos -->
+
+				</ul>
+				<!-- Nav category menu END -->
+				<!-- Nav Main menu START -->
+				<ul class="navbar-nav navbar-nav-scroll me-auto">
+					@if (User.Identity.IsAuthenticated)
+					{
+						@if (User.IsInRole("Admin"))
+						{
+							<a class="nav-link" href="~/Admin/Dashboard">Dashboard</a>
+						}
+						else
+						{
+							<a class="nav-link" href="~/User/Home/Courses">All Courses</a>
+							<a class="nav-link" href="~/User/Order">My orders</a>
+						}
+					}
+
+				</ul>
+				<!-- Nav Main menu END -->
+				<!-- Nav Search START -->
+
+				<!-- Nav Search END -->
+			</div>
+			<!-- Main navbar END -->
+			<!-- Profile START -->
+			<partial name="_LoginPartial" />
+			@await Component.InvokeAsync("ShoppingCartSummary")
+			<!-- Profile START -->
+		</div>
+	</nav>
+	<!-- Logo Nav END -->
+</header>

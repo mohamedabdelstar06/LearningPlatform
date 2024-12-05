@@ -1,0 +1,65 @@
+﻿@model List<Order>
+@{
+	ViewData["Title"] = "Dashboard";
+}
+<div class="row g-4 mb-4">
+	<!-- Counter item -->
+	<div class="col-sm-6 col-lg-4">
+		<div class="d-flex justify-content-center align-items-center p-4 bg-warning bg-opacity-15 rounded-3">
+			<span class="display-6 text-warning mb-0"><i class="fas fa-tv fa-fw"></i></span>
+			<div class="ms-4">
+				<div class="d-flex">
+					<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="25" data-purecounter-delay="200" data-purecounter-duration="0">@ViewBag.CoursesCount</h5>
+				</div>
+				<span class="mb-0 h6 fw-light">Total Courses</span>
+			</div>
+		</div>
+	</div>
+	<!-- Counter item -->
+	<div class="col-sm-6 col-lg-4">
+		<div class="d-flex justify-content-center align-items-center p-4 bg-purple bg-opacity-10 rounded-3">
+			<span class="display-6 text-purple mb-0"><i class="fas fa-user-graduate fa-fw"></i></span>
+			<div class="ms-4">
+				<div class="d-flex">
+					<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="25" data-purecounter-delay="200" data-purecounter-duration="0">@ViewBag.UsersCount</h5>
+					<span class="mb-0 h5"></span>
+				</div>
+				<span class="mb-0 h6 fw-light">Total Students</span>
+			</div>
+		</div>
+	</div>
+	<!-- Counter item -->
+	<div class="col-sm-6 col-lg-4">
+		<div class="d-flex justify-content-center align-items-center p-4 bg-info bg-opacity-10 rounded-3">
+			<span class="display-6 text-info mb-0"><i class="fas fa-gem fa-fw"></i></span>
+			<div class="ms-4">
+				<div class="d-flex">
+					<h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="12" data-purecounter-delay="300" data-purecounter-duration="0">@ViewBag.OrdersCount</h5>
+					<span class="mb-0 h5"></span>
+				</div>
+				<span class="mb-0 h6 fw-light">Total Order</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+ <h3>Last New Orders</h3>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Order ID</th>
+			<th>User Name</th>
+			<th>Total Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var order in Model)
+		{
+			<tr>
+				<td class="align-middle">@order.Id</td>
+				<td class="align-middle">@order.User.Name</td>
+				<td>@order.OrderItems.Select(x => x.Price * x.Amount).Sum().ToString("c")</td>
+			</tr>
+		}
+	</tbody>
+</table> 

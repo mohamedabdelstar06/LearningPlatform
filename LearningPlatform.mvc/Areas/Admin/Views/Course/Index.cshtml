@@ -1,0 +1,52 @@
+﻿@model List<Course>
+@{
+    ViewData["Title"] = "All Courses";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+<div>
+    <a asp-action="Create" asp-controller="Course" class="btn btn-primary">Create new course</a>
+</div>
+<br />
+<table class="table table-hover" width="100%">
+    <tr>
+        <td>Image</td>
+        <td>Course Name</td>  
+        <td>Price</td>
+        <td>Category</td>
+        <td>Actions</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><img src="/@item.Image" width="150px" height="150px"/></td>            
+            <td>@item.CourseName</td>
+            <td>@item.Price</td>
+            <td>@item.Category.CategoryName</td>
+            <td>
+                <a asp-action="Edit" asp-controller="Course" asp-route-id="@item.Id" class="btn btn-sm btn-success-soft btn-round me-1 mb-0">
+                    <i class="far fa-fw fa-edit"></i>
+                </a>
+                <form asp-action="DeleteCourse" method="post" asp-route-id="@item.Id" style="display: inline">
+                    <button class="btn btn-sm btn-danger-soft btn-round mb-0 delete-course" type="submit">
+                        <i class="fas fa-fw fa-times"></i>
+                    </button>
+                </form>
+                
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,126 @@
+﻿@model CourseViewModel
+@{
+	ViewData["Title"] = "All Courses";
+}
+<!-- =======================
+Popular course START -->
+<section>
+	<div class="container">
+		<!-- Title -->
+		<div class="row mb-4">
+			<div class="col-lg-8 mx-auto text-center">
+				<h2 class="fs-1">Most Popular All Courses</h2>
+				<p class="mb-0">Choose from hundreds of courses from specialist organizations</p>
+			</div>
+		</div>
+
+		<!-- Tabs START -->
+		<ul class="nav nav-pills nav-pills-bg-soft justify-content-sm-center mb-4 px-3" id="course-pills-tab" role="tablist">
+			<!-- All categories -->
+			<li class="nav-item me-2 me-sm-5">
+				<button class="nav-link mb-2 mb-md-0 active" onclick="Getdata(null, event)" type="button">All Courses</button>
+			</li>
+			@foreach (var category in Model.Categories)
+			{
+				<!-- Category item -->
+				<li class="nav-item me-2 me-sm-5">
+					<button class="nav-link mb-2 mb-md-0" onclick="Getdata(@category.Id, event)" type="button">@category.CategoryName</button>
+				</li>
+			}
+		</ul>
+		<!-- Tabs END -->
+		<!-- Courses content START -->
+		<div class="tab-content" id="course-pills-tabContent">
+			<div class="tab-pane fade show active">
+				<div class="row g-4" id="foodItems">
+					@foreach (var course in Model.Courses)
+					{
+						<!-- Card item START -->
+						<div class="col-sm-6 col-lg-4 col-xl-3">
+							<div class="card shadow h-100">
+								<!-- Image -->
+								<img src="@Url.Content("/" + course.Image)" class="card-img-top" alt="course image">
+								<div class="card-body pb-0">
+									<!-- Badge and favorite -->
+									<div class="d-flex justify-content-between mb-2">
+										<a href="#" class="badge bg-success bg-opacity-10 text-success">@course.Level</a>
+
+									</div>
+									<!-- Title -->
+									<h5 class="card-title fw-normal"><a href="@Url.Action("Details", "Home", new { id = course.Id })">@course.CourseName</a></h5>
+									<p class="mb-2 text-truncate-2">@course.CourseDescription</p>
+
+								</div>
+								<!-- Card footer -->
+								<div class="card-footer pt-0 pb-3">
+									<hr>
+									<div class="d-flex justify-content-between">
+										<span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>@course.CourseTime</span>
+										<span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>@course.TotalLecture lectures</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Card item END -->
+					}
+				</div>
+			</div>
+		</div>
+		<!-- Courses content END -->
+	</div>
+</section>
+<!-- =======================
+Popular course END -->
+@section Scripts {
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		function Getdata(categoryId, event) {
+			event.preventDefault(); // Prevent the default behavior of anchor
+
+			var url = '@Url.Action("Category", "Home")';
+			if (categoryId === null) {
+				url = '@Url.Action("GetAllCourses", "Home")';
+			}
+
+			$.ajax({
+				url: url,
+				type: 'GET',
+				data: categoryId !== null ? { categoryId: categoryId } : {},
+				success: function (data) {
+					var foodItemsDiv = $('#foodItems');
+					foodItemsDiv.empty();
+					data.forEach(function (item) {
+						var detailsUrl = '@Url.Action("Details", "Home", new { id = "__id__" })'.replace('__id__', item.id);
+
+						foodItemsDiv.append(
+							'<div class="col-sm-6 col-lg-4 col-xl-3">' +
+							'<div class="card shadow h-100">' +
+							'<img src="/' + item.image + '" class="card-img-top" alt="course image">' +
+							'<div class="card-body pb-0">' +
+							'<div class="d-flex justify-content-between mb-2">' +
+							'<a href="#" class="badge bg-success bg-opacity-10 text-success">' + item.level + '</a>' +
+							'</div>' +
+							'<h5 class="card-title fw-normal"><a href="' + detailsUrl + '">' + item.courseName + '</a></h5>' +
+							'<p class="mb-2 text-truncate-2">' + item.courseDescription + '</p>' +
+							'</div>' +
+							'<div class="card-footer pt-0 pb-3">' +
+							'<hr>' +
+							'<div class="d-flex justify-content-between">' +
+							'<span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>' + item.courseTime + '</span>' +
+							'<span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>' + item.totalLecture + ' lectures</span>' +
+							'</div>' +
+							'<div class="mt-2">' +
+							'</div>' +
+							'</div>' +
+							'</div>' +
+							'</div>'
+						);
+					});
+				},
+				error: function () {
+					alert('An error occurred while fetching the courses.');
+				}
+			});
+		}
+	</script>
+}

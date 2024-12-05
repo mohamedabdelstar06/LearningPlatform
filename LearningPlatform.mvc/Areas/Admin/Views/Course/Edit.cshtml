@@ -1,0 +1,59 @@
+﻿@model CourseVM
+@{
+	ViewData["Title"] = "Edit Course";
+}
+<h1>Edit Course</h1>
+<div class="row">
+	<div class="col-md-4">
+		<form method="post" enctype="multipart/form-data">
+			<input type="hidden" asp-for="Course.Id" />
+			<input type="hidden" asp-for="Course.Image" />
+			<div class="mb-3">
+				<label asp-for="Course.CourseName"></label>
+				<input asp-for="Course.CourseName" class="form-control" />
+				<span asp-validation-for="Course.CourseName" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.CourseDescription"></label>
+				<input asp-for="Course.CourseDescription" class="form-control" />
+				<span asp-validation-for="Course.CourseDescription" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.Image"></label>
+				<input type="file" name="file" id="imgfile" class="form-control" />
+
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.TotalLecture"></label>
+				<input asp-for="Course.TotalLecture" class="form-control" />
+				<span asp-validation-for="Course.TotalLecture" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.CourseTime"></label>
+				<input asp-for="Course.CourseTime" class="form-control" />
+				<span asp-validation-for="Course.CourseTime" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.Price"></label>
+				<input asp-for="Course.Price" class="form-control" />
+				<span asp-validation-for="Course.Price" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<label asp-for="Course.CategoryId"></label>
+				<select asp-for="Course.CategoryId" asp-items="Model.CategoryList">
+					<option disabled selected> -- Select Category --  </option>
+				</select>
+				<span asp-validation-for="Course.TotalLecture" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+				<button type="submit" class="btn btn-primary">Save</button>
+			</div>
+		</form>
+	</div>
+</div>
+<div>
+	<a asp-action="Index" asp-controller="Category" class="btn btn-warning">Back To Index</a>
+</div>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

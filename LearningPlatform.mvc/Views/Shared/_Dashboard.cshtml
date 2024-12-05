@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Eduport</title>
+
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>@ViewData["Title"] - Eduport</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="~/assets/vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" href="~/assets/vendor/apexcharts/css/apexcharts.css">
+
+	<!-- Theme CSS -->
+	<link id="style-switch" rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+
+</head>
+<body>
+	<partial name="_HeaderPartialcshtml" />
+	
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+
+		<!-- Page content START -->
+		<section class="pt-0">
+			<div class="container">
+				<div class="row">
+					<!-- Right sidebar START -->
+					<div class="col-xl-3" >
+						<!-- Responsive offcanvas body START -->
+						<nav class="navbar navbar-light navbar-expand-xl mx-0">
+							<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+								<!-- Offcanvas header -->
+								<div class="offcanvas-header bg-light">
+									<h5 class="offcanvas-title" id="offcanvasNavbarLabel">My profile</h5>
+									<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+								</div>
+								<!-- Offcanvas body -->
+								<div class="offcanvas-body p-3 p-xl-0" style="height: 541px;">
+									<div class="bg-dark border rounded-3 pb-0 p-3 w-100">
+										<!-- Dashboard menu -->
+										<div class="list-group list-group-dark list-group-borderless">
+											<a class="list-group-item active" asp-action="Index" asp-controller="Dashboard" ><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+											<a class="list-group-item"  asp-action="Index" asp-controller="Course" ><i class="bi bi-basket fa-fw me-2"></i>All Courses</a>
+											<a class="list-group-item" asp-action="Index" asp-controller="Category"><i class="bi bi-basket fa-fw me-2"></i>All Categoies</a>
+											<a class="list-group-item" asp-action="Index" asp-controller="Users" ><i class="bi bi-people fa-fw me-2"></i>All Students</a>
+											<a class="list-group-item" asp-action="Index" asp-controller="Order" ><i class="bi bi-folder-check fa-fw me-2"></i>All Orders</a>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</nav>
+						<!-- Responsive offcanvas body END -->
+					</div>
+					<!-- Right sidebar END -->
+					<!-- Main content START -->
+					<div class="col-xl-9">
+						@RenderBody()
+				</div><!-- Row END -->
+			</div>
+		</section>
+		<!-- =======================
+		Page content END -->
+
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
+	<!-- =======================
+	Footer START -->
+	<footer class="bg-dark p-3">
+		<div class="container">
+			<div class="row align-items-center">
+				<!-- Widget -->
+				<div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+					<!-- Logo START -->
+					<a href="index.html"> <img class="h-20px" src="~/assets/images/logo-light.svg" alt="logo"> </a>
+				</div>
+
+				<!-- Widget -->
+				<div class="col-md-4 mb-3 mb-md-0">
+					<div class="text-center text-white">
+						Copyrights ©2024 <a href="#" class="text-reset btn-link">Eduport</a>. All rights reserved.
+					</div>
+				</div>
+				<!-- Widget -->
+				<div class="col-md-4">
+					<!-- Rating -->
+					<ul class="list-inline mb-0 text-center text-md-end">
+						<li class="list-inline-item ms-2"><a href="#"><i class="text-white fab fa-facebook"></i></a></li>
+						<li class="list-inline-item ms-2"><a href="#"><i class="text-white fab fa-instagram"></i></a></li>
+						<li class="list-inline-item ms-2"><a href="#"><i class="text-white fab fa-linkedin-in"></i></a></li>
+						<li class="list-inline-item ms-2"><a href="#"><i class="text-white fab fa-twitter"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- =======================
+	Footer END -->
+	<!-- Back to top -->
+	<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Vendors -->
+	<script src="assets/vendor/purecounterjs/dist/purecounter_vanilla.js"></script>
+	<script src="assets/vendor/apexcharts/js/apexcharts.min.js"></script>
+
+	<!-- Template Functions -->
+	<script src="assets/js/functions.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

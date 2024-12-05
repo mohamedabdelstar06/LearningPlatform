@@ -1,0 +1,41 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "All Orders";
+}
+<div>
+    
+</div>
+<br />
+<table class="table table-hover" width="100%">
+    <tr>
+        <td>Order Id</td>
+         <td>Course Name</td>
+         <td>Total Price</td>
+         <td>User Name</td>
+        <td>Actions</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="align-middle">@item.Id</td>
+            <td class="align-middle">
+                <ul style="list-style: none" class="alert alert-success">
+                    @foreach (var subitem in item.OrderItems)
+                    {
+                        <li> @subitem.Course.CourseName   -  @subitem.Course.Price </li>
+                    }
+                </ul>                   
+
+            </td>
+            <td >
+                @item.OrderItems.Select(x => x.Price * x.Amount).Sum().ToString("c")
+            </td>
+            <td>@item.User.Name</td>
+            <td>
+                <form asp-action="Remove" method="post" asp-route-id="@item.Id">
+                    <button class="btn btn-danger" type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
